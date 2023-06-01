@@ -83,21 +83,13 @@ EOT
 }
 
 module "s3_role" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "3.0"
-
-  trusted_role_arns = var.trusted_role_arns
-
-  create_role = true
-
-  role_name = "${var.cluster_name}-s3-role"
-
-  role_requires_mfa = false
-
-  custom_role_policy_arns = [
-    aws_iam_policy.s3_role.arn
-  ]
-
+  source                            = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+  version                           = "3.0"
+  trusted_role_arns                 = var.trusted_role_arns
+  create_role                       = true
+  role_name                         = "${var.cluster_name}-s3-role"
+  role_requires_mfa                 = false
+  custom_role_policy_arns           = [aws_iam_policy.s3_role.arn]
   number_of_custom_role_policy_arns = 1
   tags                              = var.tags
 }
